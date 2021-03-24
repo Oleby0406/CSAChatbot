@@ -13,8 +13,11 @@ public class chatbot {
         System.out.println("Type anything in to get a response. Type in 'stop' without the quotes to exit.");
         Scanner scanner = new Scanner(System.in);
         while (!userInput.equals("stop")) {
-
             userInput = scanner.nextLine().toLowerCase();
+            if (userInput.equals("stop")) {
+                System.out.println("It was a pleasure to talk to you, see you later!");
+                break;
+            }
             chatbotAnswer = "";
 
             reactToAnswer();
