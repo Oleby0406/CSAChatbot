@@ -18,7 +18,10 @@ public class chatbot {
             chatbotAnswer = "";
 
             greetingCheck(userInput);
-            greetingCheck2(userInput);
+            feelingCheck(userInput);
+            likeCheck(userInput);
+            hateCheck(userInput);
+            confusedCheck(userInput);
             System.out.println("Bot: " + chatbotAnswer);
         }
 
@@ -112,15 +115,15 @@ public class chatbot {
     }
 
     public static void greetingCheck(String input) {
-        String[] checks = {"hello", "hi", "hey", "greetings", "good morning", "what's up"};
+        String[] checks = {"hello", "hi", "hey", "greetings", "good morning", "what's up", "sup"};
 
         String[] answers = {"Hey, nice to meet you!", "Hello, can't wait to talk to you!"};
         if (metAlready) {
-            chatbotAnswer += "I believe we have already met each other, let's talk about something else.";
+            chatbotAnswer += "I believe we have already met each other, let's talk about something else. ";
         } else {
             for (int i = 0; i < checks.length; i++) {
                 if (userInput.contains(checks[i])) {
-                    chatbotAnswer += answers[(int) (Math.random()*answers.length - 1)];
+                    chatbotAnswer += answers[(int) (Math.random()*answers.length - 1)] + " ";
                     metAlready = true;
                     break;
                 }
@@ -128,31 +131,34 @@ public class chatbot {
         }
     }
 
-    public static void greetingCheck2(String input) {        
-        System.out.println("How are you?");
-        Scanner scanner = new Scanner(System.in);
-        userInput = scanner.nextLine().toLowerCase();
-
-        String[] checks = { "good", "great", "ok", "bad", "terrible" }; // add more here, also keep all lowercase for simplicity
+    public static void feelingCheck(String input) {
+        String[] checks = { "good", "great", "ok", "bad" }; // add more here, also keep all lowercase for simplicity
 
         // make a couple of answers in an array
         String[] answers = { "That's good!", "Aww that's terrible." }; // add more, current are just ideas
 
         for (int i = 0; i < checks.length; i++) {
+            if(totalSentiment(input) > 0) {
+                chatbotAnswer += "That's good!" + " ";
+                break;
+            } else if (totalSentiment(input) < 0) {
+                chatbotAnswer += "Aww that's sad." + " ";
+                break;
+            } else {
+                System.out.println("OK.");
+                break;
+            }
+        }
+        
+        /*for (int i = 0; i < checks.length; i++) {
             if (userInput.contains(checks[0]) || userInput.contains(checks[1]) || userInput.contains(checks[2])) {
-                chatbotAnswer += answers[0];
+                chatbotAnswer += answers[0] + " ";
                 break;
             } else if (userInput.contains(checks[3])) {
-                chatbotAnswer += answers[1];
+                chatbotAnswer += answers[1] + " ";
                 break;
-            likeCheck(userInput);
-            hateCheck(userInput);
-
-            confusedCheck(userInput);
-
-            System.out.println(chatbotAnswer);
-        }
-        System.out.println("It was a pleasure to talk to you, see you later!");
+            }
+        }*/
     }
 
     public static void likeCheck(String input) {
@@ -187,7 +193,7 @@ public class chatbot {
         String[] answers = {"One day on Venus is longer than one year on Earth", "The first person convicted of speeding was going eight mph.", "The Nobel Peace Prize is named for Alfred Nobel, the inventor of dynamite."};
         if (chatbotAnswer.equals("")) {
             chatbotAnswer += "Sorry, I don't understand what you're saying. Here's a fun fact instead: ";
-            chatbotAnswer += answers[(int) (Math.random()*answers.length - 1)];
+            chatbotAnswer += answers[(int) (Math.random()*answers.length - 1)] + " ";
         }
     }
-}
+}   
