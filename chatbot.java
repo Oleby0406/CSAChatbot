@@ -14,22 +14,30 @@ public class chatbot {
         System.out.println("Type anything in to get a response. Type in 'stop' without the quotes to exit.");
         Scanner scanner = new Scanner(System.in);
         while (!userInput.equals("stop")) {
-            userInput = scanner.nextLine().toLowerCase();
+            if (feelingAsked) {
+                userInput = scanner.nextLine().toLowerCase();
+            }
             if (userInput.equals("stop")) {
                 System.out.println("It was a pleasure to talk to you, see you later!");
                 break;
             }
             chatbotAnswer = "";
+            if (!feelingAsked) {
+                System.out.println("How are you doing today?");
+                userInput = scanner.nextLine().toLowerCase();
+                greetingCheck(userInput);
+                feelingCheck();
+            } else {
+                reactToAnswer();
+                greetingCheck(userInput);
+                likeCheck(userInput);
+                hateCheck(userInput);
 
-            reactToAnswer();
-            greetingCheck(userInput);
-            feelingCheck();
-            likeCheck(userInput);
-            hateCheck(userInput);
+                confusedCheck(userInput);
 
-            confusedCheck(userInput);
-
-            askQuestion();
+                askQuestion();
+            }
+            
             System.out.println("Bot: " + chatbotAnswer);
         }
     }
@@ -102,7 +110,7 @@ public class chatbot {
     public static void greetingCheck(String input) {
         String[] checks = { "hello", "hi", "hey", "greetings", "good morning", "what's up", "sup" };
 
-        String[] answers = { "Hey, nice to meet you!", "Hello, can't wait to talk to you!" };
+        String[] answers = { "Nice to meet you!", "Hello, can't wait to talk to you!" };
         for (int i = 0; i < checks.length; i++) {
             if (userInput.contains(checks[i])) {
                 chatbotAnswer += answers[(int) (Math.random() * answers.length - 1)] + " ";
@@ -115,21 +123,18 @@ public class chatbot {
      * Bot reactions to user after asking "How are you?"
      */
     public static void feelingCheck() {
-        System.out.println("How are you doing today?");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine().toLowerCase();
         // String[] checks = { "good", "great", "ok", "bad" };
 
         // for (int i = 0; i < checks.length; i++) {
         if (!feelingAsked) {
-            if (totalSentiment(input) > 0) {
+            if (totalSentiment(userInput) > 0) {
                 chatbotAnswer += "That's good!" + " ";
                 // break;
-            } else if (totalSentiment(input) < 0) {
+            } else if (totalSentiment(userInput) < 0) {
                 chatbotAnswer += "Aww that's sad." + " ";
                 // break;
             } else {
-                System.out.println("OK.");
+                chatbotAnswer += "OK. ";
                 // break;
             }
             feelingAsked = true;
@@ -173,7 +178,7 @@ public class chatbot {
     }
 
     /**
-     * If the user does not say anything, bot gives a random fact
+     * If the user does not say anything or says something that the bot doesn't understand, bot gives a random fact
      */
     public static void confusedCheck(String input) {
         String[] answers = { "One day on Venus is longer than one year on Earth",
@@ -188,14 +193,14 @@ public class chatbot {
     }
 
     /**
-     * Bot asks a random question to the user
+     * Bot asks a random question to the user if the user's answers are short
      */
     public static void askQuestion() {
-        String[] questions = { "How are you doing today?", "What's the weather like where you live?",
+        String[] questions = {"What's the weather like where you live?",
                 "What is your favorite hobby?", "Is cereal a soup?",
                 "If a tree falls in a forest and no one is around to hear it, does it make a sound?",
                 "What's the most useless thing you own?", "Do you have a pet?" };
-        if (userInput.length() < 10 && questionAsked == false) {
+        if (userInput.length() < 15 && questionAsked == false) {
             questionAsked = true;
             chatbotAnswer += "I have a question for you: ";
             chatbotAnswer += questions[(int) (Math.random() * questions.length - 1)] + " ";
@@ -203,7 +208,7 @@ public class chatbot {
     }
 
     /**
-     * Bot gives a random reaction to after a question is asked
+     * Bot gives a random reaction to after a question it is asked
      */
     public static void reactToAnswer() {
         String[] reactions = { "That's cool!", "Interesting!", "Tell me more.", "Thanks for sharing!" };
