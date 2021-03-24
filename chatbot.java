@@ -112,7 +112,7 @@ public class chatbot {
     }
 
     public static void greetingCheck(String input) {
-        String[] checks = {"hello", "hi", "hey", "greetings", "good morning", "what's up"};
+        String[] checks = {"hello", "hi", "hey", "greetings", "good morning", "what's up", "sup"};
 
         String[] answers = {"Hey, nice to meet you!", "Hello, can't wait to talk to you!"};
         for (int i = 0; i < checks.length; i++) {
@@ -130,6 +130,19 @@ public class chatbot {
         String[] answers = { "That's good!", "Aww that's terrible." }; // add more, current are just ideas
 
         for (int i = 0; i < checks.length; i++) {
+            if(totalSentiment(input) > 0) {
+                chatbotAnswer += "That's good!" + " ";
+                break;
+            } else if (totalSentiment(input) < 0) {
+                chatbotAnswer += "Aww that's sad." + " ";
+                break;
+            } else {
+                System.out.println("OK.");
+                break;
+            }
+        }
+        
+        /*for (int i = 0; i < checks.length; i++) {
             if (userInput.contains(checks[0]) || userInput.contains(checks[1]) || userInput.contains(checks[2])) {
                 chatbotAnswer += answers[0] + " ";
                 break;
@@ -137,7 +150,7 @@ public class chatbot {
                 chatbotAnswer += answers[1] + " ";
                 break;
             }
-        }
+        }*/
     }
 
     public static void likeCheck(String input) {
