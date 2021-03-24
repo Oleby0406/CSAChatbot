@@ -16,7 +16,7 @@ public class chatbot {
 
             userInput = scanner.nextLine().toLowerCase();
             chatbotAnswer = "";
-            
+
             reactToAnswer();
             greetingCheck(userInput);
             feelingCheck(userInput);
@@ -42,28 +42,11 @@ public class chatbot {
             while (input.hasNextLine()) {
                 String[] temp = input.nextLine().split(",");
                 sentiment.put(temp[0], Double.parseDouble(temp[1]));
-                // System.out.println("added "+ temp[0] + ", " + temp[1]);
             }
             input.close();
         } catch (Exception e) {
             System.out.println("Error reading or parsing cleanSentiment.csv");
         }
-
-        // read in the positive adjectives in postiveAdjectives.txt
-        /*
-         * try { Scanner input = new Scanner(new File("positiveAdjectives.txt")); while
-         * (input.hasNextLine()) { String temp = input.nextLine().trim();
-         * System.out.println(temp); posAdjectives.add(temp); } input.close(); } catch
-         * (Exception e) {
-         * System.out.println("Error reading or parsing postitiveAdjectives.txt\n" + e);
-         * }
-         * 
-         * // read in the negative adjectives in negativeAdjectives.txt try { Scanner
-         * input = new Scanner(new File("negativeAdjectives.txt")); while
-         * (input.hasNextLine()) { negAdjectives.add(input.nextLine().trim()); }
-         * input.close(); } catch (Exception e) {
-         * System.out.println("Error reading or parsing negativeAdjectives.txt"); }
-         */
     }
 
     public static double sentimentVal(String word) {
@@ -124,10 +107,9 @@ public class chatbot {
     }
 
     public static void feelingCheck(String input) {
-        String[] checks = { "good", "great", "ok", "bad" }; // add more here, also keep all lowercase for simplicity
+        String[] checks = { "good", "great", "ok", "bad" };
 
-        // make a couple of answers in an array
-        String[] answers = { "That's good!", "Aww that's terrible." }; // add more, current are just ideas
+        String[] answers = { "That's good!", "Aww that's terrible." }; 
 
         for (int i = 0; i < checks.length; i++) {
             if(totalSentiment(input) > 0) {
@@ -141,16 +123,6 @@ public class chatbot {
                 break;
             }
         }
-        
-        /*for (int i = 0; i < checks.length; i++) {
-            if (userInput.contains(checks[0]) || userInput.contains(checks[1]) || userInput.contains(checks[2])) {
-                chatbotAnswer += answers[0] + " ";
-                break;
-            } else if (userInput.contains(checks[3])) {
-                chatbotAnswer += answers[1] + " ";
-                break;
-            }
-        }*/
     }
 
     public static void likeCheck(String input) {
