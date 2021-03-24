@@ -9,6 +9,7 @@ public class chatbot{
             userInput = scanner.nextLine().toLowerCase();
             chatbotAnswer = "";
             greetingCheck(userInput);
+            likeCheck(userInput);
             System.out.println(chatbotAnswer);
         }
 
@@ -33,6 +34,20 @@ public class chatbot{
         }
         //loop through array and check for a greeting word here from the checks array using userInput
         //concatenate the answer from this check to the final answer
+    }
+
+    public static void likeCheck(String input) {
+        String answer = "";
+        if (userInput.contains("like")) {
+            for (int i = input.indexOf("like") + 5; i < input.length(); i++) {
+                if (!input.substring(i, i + 1).equals(" ")) {
+                    answer += input.substring(i, i + 1);
+                } else {
+                    break;
+                }
+            }
+            chatbotAnswer += "I like " + answer + " too!";
+        }
     }
 
     //add other checks that come to mind as separate methods similar to greetingCheck()
