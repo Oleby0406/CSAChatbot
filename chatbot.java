@@ -11,11 +11,14 @@ public class chatbot {
     static boolean feelingAsked = false;
 
     public static void main(String[] args) {
-        System.out.println("Hello! Type something in to get a response. Type \"stop\" to stop chatting.");
+        System.out.println("Type anything in to get a response. Type in 'stop' without the quotes to exit.");
         Scanner scanner = new Scanner(System.in);
         while (!userInput.equals("stop")) {
-
             userInput = scanner.nextLine().toLowerCase();
+            if (userInput.equals("stop")) {
+                System.out.println("It was a pleasure to talk to you, see you later!");
+                break;
+            }
             chatbotAnswer = "";
 
             reactToAnswer();
@@ -65,7 +68,8 @@ public class chatbot {
     }
 
     /**
-     * Returns an array consisting of the words in the user input, used in totalSentiment
+     * Returns an array consisting of the words in the user input, used in
+     * totalSentiment
      */
     public static ArrayList<String> getWords(String input) {
         String temp = "";
@@ -80,7 +84,8 @@ public class chatbot {
     }
 
     /**
-     * Calculates the sentiment value of each word the user input array and totals it
+     * Calculates the sentiment value of each word the user input array and totals
+     * it
      */
     public static double totalSentiment(String word) {
         double finalScore = 0;
@@ -113,24 +118,24 @@ public class chatbot {
         System.out.println("How are you doing today?");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().toLowerCase();
-        //String[] checks = { "good", "great", "ok", "bad" };
+        // String[] checks = { "good", "great", "ok", "bad" };
 
-        //for (int i = 0; i < checks.length; i++) {
+        // for (int i = 0; i < checks.length; i++) {
         if (!feelingAsked) {
             if (totalSentiment(input) > 0) {
                 chatbotAnswer += "That's good!" + " ";
-                //break;
+                // break;
             } else if (totalSentiment(input) < 0) {
                 chatbotAnswer += "Aww that's sad." + " ";
-                //break;
+                // break;
             } else {
                 System.out.println("OK.");
-                //break;
+                // break;
             }
             feelingAsked = true;
         }
-        
-        //}
+
+        // }
     }
 
     /**
@@ -186,11 +191,11 @@ public class chatbot {
      * Bot asks a random question to the user
      */
     public static void askQuestion() {
-        String[] questions = { "What's the weather like where you live?",
+        String[] questions = { "How are you doing today?", "What's the weather like where you live?",
                 "What is your favorite hobby?", "Is cereal a soup?",
                 "If a tree falls in a forest and no one is around to hear it, does it make a sound?",
                 "What's the most useless thing you own?", "Do you have a pet?" };
-        if (userInput.length() < 10) {
+        if (userInput.length() < 10 && questionAsked == false) {
             questionAsked = true;
             chatbotAnswer += "I have a question for you: ";
             chatbotAnswer += questions[(int) (Math.random() * questions.length - 1)] + " ";
