@@ -18,9 +18,11 @@ public class chatbot {
             likeCheck(userInput);
             hateCheck(userInput);
 
+            confusedCheck(userInput);
+
             System.out.println(chatbotAnswer);
         }
-        System.out.println("It was a pleasure to talk to you, see you later!")
+        System.out.println("It was a pleasure to talk to you, see you later!");
     }
 
     public static void greetingCheck(String input) {
@@ -65,6 +67,14 @@ public class chatbot {
                 }
             }
             chatbotAnswer += "I am not a big fan of " + answer + " as well to be honest.";
+        }
+    }
+
+    public static void confusedCheck(String input) {
+        String[] answers = {"One day on Venus is longer than one year on Earth", "The first person convicted of speeding was going eight mph.", "The Nobel Peace Prize is named for Alfred Nobel, the inventor of dynamite."};
+        if (chatbotAnswer.equals("")) {
+            chatbotAnswer += "Sorry, I don't understand what you're saying. Here's a fun fact instead: ";
+            chatbotAnswer += answers[(int) (Math.random()*answers.length - 1)];
         }
     }
 }
