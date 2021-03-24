@@ -9,7 +9,7 @@ public class chatbot {
     static String userInput = "";
     static boolean questionAsked = false;
 
-    public static void main(String []args) {
+    public static void main(String []args) { 
         System.out.println("Type anything in to get a response. Type in 'stop' without the quotes to exit.");
         Scanner scanner = new Scanner(System.in);
         while (!userInput.equals("stop")) {
@@ -163,7 +163,7 @@ public class chatbot {
 
     public static void askQuestion() {
         String[] questions = {"How are you doing today?", "What's the weather like where you live?", "What is your favorite hobby?", "Is cereal a soup?", "If a tree falls in a forest and no one is around to hear it, does it make a sound?", "What's the most useless thing you own?", "Do you have a pet?"};
-        if (userInput.length() < 10) {
+        if (userInput.length() < 10 && questionAsked == false) {
             questionAsked = true;
             chatbotAnswer += "I have a question for you: ";
             chatbotAnswer += questions[(int) (Math.random()*questions.length - 1)] + " ";
