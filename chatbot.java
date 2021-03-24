@@ -2,6 +2,7 @@ import java.util.Scanner;
 public class chatbot{
     static String chatbotAnswer = "";
     static String userInput = "";
+    static boolean metAlready = false;
     public static void main(String []args){
         System.out.println("Hello");
         Scanner scanner = new Scanner(System.in);
@@ -10,6 +11,7 @@ public class chatbot{
             chatbotAnswer = "";
             greetingCheck(userInput);
             likeCheck(userInput);
+            hateCheck(userInput);
             System.out.println(chatbotAnswer);
         }
 
@@ -21,17 +23,22 @@ public class chatbot{
     }
 
     public static void greetingCheck(String input) {
-        String[] checks = {"hello", "hi", "hey"}; //add more here, also keep all lowercase for simplicity
+        String[] checks = {"hello", "hi", "hey", "greetings", "good morning", "what's up"}; //add more here, also keep all lowercase for simplicity
 
         //make a couple of answers in an array
         String[] answers = {"Hey, Nice to meet you!", "Hello!"}; //add more, current are just ideas
-
-        for (int i = 0; i < checks.length; i++) {
-            if (userInput.contains(checks[i])) {
-                chatbotAnswer += answers[(int) (Math.random()*checks.length - 1)];
-                break;
+        if (metAlready) {
+            chatbotAnswer += "I believe we have already met each other, let's talk about something else.";
+        } else {
+            for (int i = 0; i < checks.length; i++) {
+                if (userInput.contains(checks[i])) {
+                    chatbotAnswer += answers[(int) (Math.random()*answers.length - 1)];
+                    metAlready = true;
+                    break;
+                }
             }
         }
+        
         //loop through array and check for a greeting word here from the checks array using userInput
         //concatenate the answer from this check to the final answer
     }
@@ -47,6 +54,20 @@ public class chatbot{
                 }
             }
             chatbotAnswer += "I like " + answer + " too!";
+        }
+    }
+
+    public static void hateCheck(String input) {
+        String answer = "";
+        if (userInput.contains("hate")) {
+            for (int i = input.indexOf("hate") + 5; i < input.length(); i++) {
+                if (!input.substring(i, i + 1).equals(" ")) {
+                    answer += input.substring(i, i + 1);
+                } else {
+                    break;
+                }
+            }
+            chatbotAnswer += "I am not a big fan of " + answer + " as well to be honest.";
         }
     }
 
