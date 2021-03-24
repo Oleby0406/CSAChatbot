@@ -1,32 +1,32 @@
 import java.util.Scanner;
-public class chatbot{
+
+public class chatbot {
+
     static String chatbotAnswer = "";
     static String userInput = "";
     static boolean metAlready = false;
-    public static void main(String []args){
-        System.out.println("Hello");
+
+    public static void main(String []args) {
+        System.out.println("Type anything in to get a response. Type in 'stop' without the quotes to exit.");
         Scanner scanner = new Scanner(System.in);
         while (!userInput.equals("stop")) {
+
             userInput = scanner.nextLine().toLowerCase();
             chatbotAnswer = "";
+
             greetingCheck(userInput);
             likeCheck(userInput);
             hateCheck(userInput);
+
             System.out.println(chatbotAnswer);
         }
-
-        //while loop
-        //every iteration get a scanner to get input, make it lowercase and put that into userInput
-        //clear the final answer, run all the checks we got to form the final answer
-        //print final answer 
-        //break loop when a certain phrase is typed like "stop" or "break"
+        System.out.println("It was a pleasure to talk to you, see you later!")
     }
 
     public static void greetingCheck(String input) {
-        String[] checks = {"hello", "hi", "hey", "greetings", "good morning", "what's up"}; //add more here, also keep all lowercase for simplicity
+        String[] checks = {"hello", "hi", "hey", "greetings", "good morning", "what's up"};
 
-        //make a couple of answers in an array
-        String[] answers = {"Hey, Nice to meet you!", "Hello!"}; //add more, current are just ideas
+        String[] answers = {"Hey, nice to meet you!", "Hello, can't wait to talk to you!"};
         if (metAlready) {
             chatbotAnswer += "I believe we have already met each other, let's talk about something else.";
         } else {
@@ -38,9 +38,6 @@ public class chatbot{
                 }
             }
         }
-        
-        //loop through array and check for a greeting word here from the checks array using userInput
-        //concatenate the answer from this check to the final answer
     }
 
     public static void likeCheck(String input) {
@@ -70,7 +67,4 @@ public class chatbot{
             chatbotAnswer += "I am not a big fan of " + answer + " as well to be honest.";
         }
     }
-
-    //add other checks that come to mind as separate methods similar to greetingCheck()
-    //make a method that just spits out random fun animal facts or something just to make it more fun
 }
