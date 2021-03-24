@@ -1,16 +1,7 @@
 import java.util.Scanner;
-<<<<<<< HEAD
 import java.io.File;
 import java.util.HashMap;
 import java.util.ArrayList;
-
-public class chatbot {
-    static String chatbotAnswer = "";
-    static String userInput = "";
-
-    public static void main(String[] args) {
-        System.out.println("Hello! Type \"stop\" to stop chatting.");
-=======
 
 public class chatbot {
 
@@ -20,7 +11,6 @@ public class chatbot {
 
     public static void main(String []args) {
         System.out.println("Type anything in to get a response. Type in 'stop' without the quotes to exit.");
->>>>>>> 04b686fc11c3f58df87c2157c00fd39043052821
         Scanner scanner = new Scanner(System.in);
         while (!userInput.equals("stop")) {
 
@@ -28,7 +18,6 @@ public class chatbot {
             chatbotAnswer = "";
 
             greetingCheck(userInput);
-<<<<<<< HEAD
             greetingCheck2(userInput);
             System.out.println("Bot: " + chatbotAnswer);
         }
@@ -123,51 +112,6 @@ public class chatbot {
     }
 
     public static void greetingCheck(String input) {
-        String[] checks = { "hello", "hi", "hey", "sup" }; // add more here, also keep all lowercase for simplicity
-
-        // make a couple of answers in an array
-        String[] answers = { "Hey, nice to meet you!", "Hello!", ":)" }; // add more, current are just ideas
-
-        for (int i = 0; i < checks.length; i++) {
-            if (userInput.contains(checks[i])) {
-                chatbotAnswer += answers[(int) (Math.random() * checks.length - 1)];
-                break;
-            }
-        }
-        // loop through array and check for a greeting word here from the checks array
-        // using userInput
-        // concatenate the answer from this check to the final answer
-    }
-
-    public static void greetingCheck2(String input) {        
-        System.out.println("How are you?");
-        Scanner scanner = new Scanner(System.in);
-        userInput = scanner.nextLine().toLowerCase();
-
-        String[] checks = { "good", "great", "ok", "bad" }; // add more here, also keep all lowercase for simplicity
-
-        // make a couple of answers in an array
-        String[] answers = { "That's good!", "Aww that's terrible." }; // add more, current are just ideas
-
-        for (int i = 0; i < checks.length; i++) {
-            if (userInput.contains(checks[0]) || userInput.contains(checks[1]) || userInput.contains(checks[2])) {
-                chatbotAnswer += answers[0];
-                break;
-            } else if (userInput.contains(checks[3])) {
-                chatbotAnswer += answers[1];
-                break;
-=======
-            likeCheck(userInput);
-            hateCheck(userInput);
-
-            confusedCheck(userInput);
-
-            System.out.println(chatbotAnswer);
-        }
-        System.out.println("It was a pleasure to talk to you, see you later!");
-    }
-
-    public static void greetingCheck(String input) {
         String[] checks = {"hello", "hi", "hey", "greetings", "good morning", "what's up"};
 
         String[] answers = {"Hey, nice to meet you!", "Hello, can't wait to talk to you!"};
@@ -182,6 +126,33 @@ public class chatbot {
                 }
             }
         }
+    }
+
+    public static void greetingCheck2(String input) {        
+        System.out.println("How are you?");
+        Scanner scanner = new Scanner(System.in);
+        userInput = scanner.nextLine().toLowerCase();
+
+        String[] checks = { "good", "great", "ok", "bad", "terrible" }; // add more here, also keep all lowercase for simplicity
+
+        // make a couple of answers in an array
+        String[] answers = { "That's good!", "Aww that's terrible." }; // add more, current are just ideas
+
+        for (int i = 0; i < checks.length; i++) {
+            if (userInput.contains(checks[0]) || userInput.contains(checks[1]) || userInput.contains(checks[2])) {
+                chatbotAnswer += answers[0];
+                break;
+            } else if (userInput.contains(checks[3])) {
+                chatbotAnswer += answers[1];
+                break;
+            likeCheck(userInput);
+            hateCheck(userInput);
+
+            confusedCheck(userInput);
+
+            System.out.println(chatbotAnswer);
+        }
+        System.out.println("It was a pleasure to talk to you, see you later!");
     }
 
     public static void likeCheck(String input) {
@@ -207,19 +178,9 @@ public class chatbot {
                 } else {
                     break;
                 }
->>>>>>> 04b686fc11c3f58df87c2157c00fd39043052821
             }
             chatbotAnswer += "I am not a big fan of " + answer + " as well to be honest.";
         }
-<<<<<<< HEAD
-        // loop through array and check for a greeting word here from the checks array
-        // using userInput
-        // concatenate the answer from this check to the final answer
-    }
-
-    // make a method that just spits out random fun animal facts or something just
-    // to make it more fun
-=======
     }
 
     public static void confusedCheck(String input) {
@@ -229,5 +190,4 @@ public class chatbot {
             chatbotAnswer += answers[(int) (Math.random()*answers.length - 1)];
         }
     }
->>>>>>> 04b686fc11c3f58df87c2157c00fd39043052821
 }
