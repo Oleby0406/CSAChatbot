@@ -45,7 +45,7 @@ public class chatbot {
             while (input.hasNextLine()) {
                 String[] temp = input.nextLine().split(",");
                 sentiment.put(temp[0], Double.parseDouble(temp[1]));
-                // System.out.println("added "+ temp[0] + ", " + temp[1]);
+                System.out.println("added "+ temp[0] + ", " + temp[1]);
             }
             input.close();
         } catch (Exception e) {
