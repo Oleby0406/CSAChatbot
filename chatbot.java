@@ -37,7 +37,7 @@ public class chatbot {
 
                 askQuestion();
             }
-            
+
             System.out.println("Bot: " + chatbotAnswer);
         }
     }
@@ -65,17 +65,6 @@ public class chatbot {
     }
 
     /**
-     * Calculates the sentiment value of a single word
-     */
-    public static double sentimentVal(String word) {
-        try {
-            return sentiment.get(word.toLowerCase());
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    /**
      * Returns an array consisting of the words in the user input, used in
      * totalSentiment
      */
@@ -92,7 +81,18 @@ public class chatbot {
     }
 
     /**
-     * Calculates the sentiment value of each word the user input array and totals
+     * Calculates the sentiment value of a single word
+     */
+    public static double sentimentVal(String word) {
+        try {
+            return sentiment.get(word.toLowerCase());
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Calculates the sentiment value of each word from the user input array and totals
      * it
      */
     public static double totalSentiment(String word) {
@@ -139,7 +139,6 @@ public class chatbot {
             }
             feelingAsked = true;
         }
-
         // }
     }
 
@@ -178,7 +177,8 @@ public class chatbot {
     }
 
     /**
-     * If the user does not say anything or says something that the bot doesn't understand, bot gives a random fact
+     * If the user does not say anything or says something that the bot doesn't
+     * understand, bot gives a random fact
      */
     public static void confusedCheck(String input) {
         String[] answers = { "One day on Venus is longer than one year on Earth",
@@ -196,8 +196,8 @@ public class chatbot {
      * Bot asks a random question to the user if the user's answers are short
      */
     public static void askQuestion() {
-        String[] questions = {"What's the weather like where you live?",
-                "What is your favorite hobby?", "Is cereal a soup?",
+        String[] questions = { "What's the weather like where you live?", "What is your favorite hobby?",
+                "Is cereal a soup?",
                 "If a tree falls in a forest and no one is around to hear it, does it make a sound?",
                 "What's the most useless thing you own?", "Do you have a pet?" };
         if (userInput.length() < 15 && questionAsked == false) {
@@ -208,7 +208,7 @@ public class chatbot {
     }
 
     /**
-     * Bot gives a random reaction to after a question it is asked
+     * Bot gives a random reaction to after a question is asked
      */
     public static void reactToAnswer() {
         String[] reactions = { "That's cool!", "Interesting!", "Tell me more.", "Thanks for sharing!" };
